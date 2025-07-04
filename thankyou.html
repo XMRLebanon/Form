@@ -23,9 +23,9 @@
     }
 
     img {
-      width: 150px;
-      margin-bottom: 20px;
-      filter: drop-shadow(0 0 5px #FF6600);
+      width: 220px; /* Increased from 150px */
+      margin-bottom: 25px;
+      filter: drop-shadow(0 0 8px #FF6600);
     }
 
     h1 {
@@ -70,12 +70,13 @@
   <img src="./logo.png" alt="XMRsouk Logo" />
   <h1>Thank You!</h1>
   <p>Your business has been added to XMRsouk.</p>
-  <a href="https://x.com/AboudeNahle?t=vTEttB1J5DEsu7KW35roxw&s=09" target="_blank" rel="noopener noreferrer">Follow us on X</a>
+  <a href="https://x.com/AboudeNahle?t=vTEttB1J5DEsu7KW35roxw&s=09" target="_blank" rel="noopener noreferrer">
+    Follow us on X
+  </a>
 
   <canvas id="confetti"></canvas>
 
   <script>
-    // Confetti animation code
     (() => {
       const canvas = document.getElementById('confetti');
       const ctx = canvas.getContext('2d');
@@ -86,8 +87,6 @@
 
       const confettiCount = 150;
       const confetti = [];
-
-      // Colors matching dark theme and XMRsouk orange
       const colors = ['#FF6600', '#FF8533', '#CC5200', '#FFB380', '#FF994C'];
 
       function randomRange(min, max) {

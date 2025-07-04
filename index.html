@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join XMRsouk — Accept Monero in Lebanon</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    header img {
+      width: 200px;
+    }
+    h1 {
+      color: #FF6600;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #FF6600;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e65c00;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Replace the src with the path to your uploaded logo file in GitHub -->
+    <img src="./logo.png" alt="XMRsouk Logo" />
+    <h1>Join XMRsouk</h1>
+    <p>Accept Monero (XMR) in Lebanon</p>
+  </header>
+  <form action="https://formspree.io/f/yourformid" method="POST">
+    <label>Business Name:
+      <input type="text" name="business_name" required />
+    </label>
+    <label>Type of Business:
+      <input type="text" name="business_type" required />
+    </label>
+    <label>Location (City / Area):
+      <input type="text" name="location" required />
+    </label>
+    <label>Contact Person Name:
+      <input type="text" name="contact_name" required />
+    </label>
+    <label>Phone Number or WhatsApp:
+      <input type="text" name="phone" required />
+    </label>
+    <label>Do you have reliable internet access?
+      <select name="internet" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </label>
+    <label>Have you accepted cryptocurrency before?
+      <select name="crypto_before" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </label>
+    <label>Are you interested in learning how to accept Monero?
+      <select name="learn_xmr" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </label>
+    <label>Additional Comments / Questions:
+      <textarea name="comments"></textarea>
+    </label>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>

@@ -36,6 +36,7 @@
       width: 200px;
       transition: transform 0.5s;
     }
+
     header img:hover {
       transform: scale(1.05);
     }
@@ -98,7 +99,7 @@
     <p>Accept Monero (XMR) in Lebanon</p>
   </header>
 
-  <form action="https://formspree.io/f/xovwbzak" method="POST">
+  <form onsubmit="event.preventDefault(); window.location.href='thankyou.html';">
     <label>Business Name:
       <input type="text" name="business_name" required />
     </label>
@@ -143,9 +144,6 @@
     <label>Additional Comments / Questions:
       <textarea name="comments"></textarea>
     </label>
-
-    <!-- Redirect to the hosted thank-you page -->
-    <input type="hidden" name="_redirect" value="https://xmrlebanon.github.io/Form/thankyou.html" />
 
     <button type="submit">Submit</button>
   </form>

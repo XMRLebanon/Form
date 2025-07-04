@@ -13,7 +13,7 @@
       margin: 0 auto;
       padding: 20px;
       animation: fadeIn 1s ease-out;
-      transition: text-align 0.3s ease;
+      text-align: left;
     }
 
     @keyframes fadeIn {
@@ -89,144 +89,62 @@
       box-shadow: 0 0 10px rgba(255, 102, 0, 0.6);
       transform: scale(1.02);
     }
-
-    .lang-switch {
-      text-align: center;
-      margin-top: 20px;
-      animation: fadeIn 1.2s ease-out;
-    }
-
-    .lang-switch button {
-      margin: 0 5px;
-      padding: 5px 10px;
-      background: #333;
-      border: 1px solid #555;
-      color: #fff;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .lang-switch button:hover {
-      background: #444;
-    }
   </style>
-  <script>
-    function switchLang(lang) {
-      const en = document.querySelectorAll('[lang="en"]');
-      const ar = document.querySelectorAll('[lang="ar"]');
-      en.forEach(el => el.style.display = lang === 'en' ? 'block' : 'none');
-      ar.forEach(el => el.style.display = lang === 'ar' ? 'block' : 'none');
-
-      if (lang === 'ar') {
-        document.documentElement.setAttribute('dir', 'rtl');
-        document.body.style.textAlign = 'right';
-      } else {
-        document.documentElement.setAttribute('dir', 'ltr');
-        document.body.style.textAlign = 'left';
-      }
-    }
-    window.onload = () => switchLang('en');
-  </script>
 </head>
 <body>
   <header>
     <img src="./logo.png" alt="XMRsouk Logo" />
-    <h1 lang="en">Join XMRsouk</h1>
-    <h1 lang="ar" style="display:none;">انضم إلى سوق مونيرو</h1>
-    <p lang="en">Accept Monero (XMR) in Lebanon</p>
-    <p lang="ar" style="display:none;">اقبل مونيرو (XMR) في لبنان</p>
+    <h1>Join XMRsouk</h1>
+    <p>Accept Monero (XMR) in Lebanon</p>
   </header>
 
-  <div class="lang-switch">
-    <button onclick="switchLang('en')">English</button>
-    <button onclick="switchLang('ar')">العربية</button>
-  </div>
-
   <form action="https://formspree.io/f/yourformid" method="POST" onsubmit="window.location='thankyou.html'; return false;">
-    <label lang="en">Business Name:
-      <input type="text" name="business_name" required />
-    </label>
-    <label lang="ar" style="display:none;">اسم المتجر:
+    <label>Business Name:
       <input type="text" name="business_name" required />
     </label>
 
-    <label lang="en">Type of Business:
-      <input type="text" name="business_type" required />
-    </label>
-    <label lang="ar" style="display:none;">نوع النشاط التجاري:
+    <label>Type of Business:
       <input type="text" name="business_type" required />
     </label>
 
-    <label lang="en">Location (City / Area):
-      <input type="text" name="location" required />
-    </label>
-    <label lang="ar" style="display:none;">الموقع (المدينة / المنطقة):
+    <label>Location (City / Area):
       <input type="text" name="location" required />
     </label>
 
-    <label lang="en">Contact Person Name:
-      <input type="text" name="contact_name" required />
-    </label>
-    <label lang="ar" style="display:none;">اسم المسؤول:
+    <label>Contact Person Name:
       <input type="text" name="contact_name" required />
     </label>
 
-    <label lang="en">Phone Number or WhatsApp:
-      <input type="text" name="phone" required />
-    </label>
-    <label lang="ar" style="display:none;">رقم الهاتف أو واتساب:
+    <label>Phone Number or WhatsApp:
       <input type="text" name="phone" required />
     </label>
 
-    <label lang="en">Do you have reliable internet access?
+    <label>Do you have reliable internet access?
       <select name="internet" required>
         <option value="Yes">Yes</option>
         <option value="No">No</option>
       </select>
     </label>
-    <label lang="ar" style="display:none;">هل لديك اتصال إنترنت موثوق؟
-      <select name="internet" required>
-        <option value="Yes">نعم</option>
-        <option value="No">لا</option>
-      </select>
-    </label>
 
-    <label lang="en">Have you accepted cryptocurrency before?
+    <label>Have you accepted cryptocurrency before?
       <select name="crypto_before" required>
         <option value="Yes">Yes</option>
         <option value="No">No</option>
       </select>
     </label>
-    <label lang="ar" style="display:none;">هل سبق لك قبول العملات الرقمية؟
-      <select name="crypto_before" required>
-        <option value="Yes">نعم</option>
-        <option value="No">لا</option>
-      </select>
-    </label>
 
-    <label lang="en">Are you interested in learning how to accept Monero?
+    <label>Are you interested in learning how to accept Monero?
       <select name="learn_xmr" required>
         <option value="Yes">Yes</option>
         <option value="No">No</option>
       </select>
     </label>
-    <label lang="ar" style="display:none;">هل ترغب في تعلم كيفية قبول مونيرو؟
-      <select name="learn_xmr" required>
-        <option value="Yes">نعم</option>
-        <option value="No">لا</option>
-      </select>
-    </label>
 
-    <label lang="en">Additional Comments / Questions:
-      <textarea name="comments"></textarea>
-    </label>
-    <label lang="ar" style="display:none;">ملاحظات إضافية / أسئلة:
+    <label>Additional Comments / Questions:
       <textarea name="comments"></textarea>
     </label>
 
-    <button type="submit" lang="en">Submit</button>
-    <button type="submit" lang="ar" style="display:none;">إرسال</button>
+    <button type="submit">Submit</button>
   </form>
 </body>
 </html>

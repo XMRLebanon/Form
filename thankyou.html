@@ -2,114 +2,155 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Thank You — XMRsouk</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
     body {
       margin: 0;
-      padding: 0;
-      background-color: #121212;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #FF6600;
+      font-family: 'Roboto', sans-serif;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
-      overflow: hidden;
       text-align: center;
-    }
-
-    h1 {
-      color: #FF6600;
-      margin-bottom: 10px;
-    }
-
-    p {
-      max-width: 500px;
-      font-size: 1.2em;
-    }
-
-    a {
-      margin-top: 20px;
-      display: inline-block;
-      color: #FF6600;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    a:hover {
-      color: #ffa94d;
+      overflow: hidden;
+      padding: 20px;
     }
 
     img {
       width: 150px;
       margin-bottom: 20px;
+      filter: drop-shadow(0 0 5px #FF6600);
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin: 0 0 15px 0;
+      text-shadow: 0 0 10px #FF6600;
+    }
+
+    p {
+      font-size: 1.3rem;
+      margin: 0 0 30px 0;
+      color: #eee;
+    }
+
+    a {
+      display: inline-block;
+      color: #FF6600;
+      text-decoration: none;
+      font-weight: 700;
+      border: 2px solid #FF6600;
+      padding: 10px 20px;
+      border-radius: 25px;
+      transition: background-color 0.3s, color 0.3s;
+      box-shadow: 0 0 10px #FF6600;
+    }
+
+    a:hover {
+      background-color: #FF6600;
+      color: #121212;
     }
 
     canvas {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       pointer-events: none;
+      z-index: 9999;
     }
   </style>
 </head>
 <body>
+  <img src="./logo.png" alt="XMRsouk Logo" />
+  <h1>Thank You!</h1>
+  <p>Your business has been added to XMRsouk.</p>
+  <a href="https://x.com/AboudeNahle?t=vTEttB1J5DEsu7KW35roxw&s=09" target="_blank" rel="noopener noreferrer">Follow us on X</a>
+
   <canvas id="confetti"></canvas>
 
-  <img src="./logo.png" alt="XMRsouk Logo" />
-  <h1>Thank you!</h1>
-  <p>Your submission has been received. We're excited to connect with you and grow Monero adoption in Lebanon.</p>
-
-  <a href="https://x.com/AboudeNahle?t=vTEttB1J5DEsu7KW35roxw&s=09" target="_blank">Follow us on X</a>
-
   <script>
-    const canvas = document.getElementById('confetti');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Confetti animation code
+    (() => {
+      const canvas = document.getElementById('confetti');
+      const ctx = canvas.getContext('2d');
+      let W = window.innerWidth;
+      let H = window.innerHeight;
+      canvas.width = W;
+      canvas.height = H;
 
-    const confetti = Array.from({ length: 150 }).map(() => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height - canvas.height,
-      r: Math.random() * 6 + 4,
-      d: Math.random() * 10 + 5,
-      color: ['#FF6600', '#ffaa00', '#ff4400', '#ffb347'][Math.floor(Math.random() * 4)],
-      tilt: Math.random() * 10 - 5
-    }));
+      const confettiCount = 150;
+      const confetti = [];
 
-    function drawConfetti() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      confetti.forEach(c => {
-        ctx.beginPath();
-        ctx.lineWidth = c.r / 2;
-        ctx.strokeStyle = c.color;
-        ctx.moveTo(c.x + c.tilt, c.y);
-        ctx.lineTo(c.x, c.y + c.tilt + c.d);
-        ctx.stroke();
-      });
-      updateConfetti();
-    }
+      // Colors matching dark theme and XMRsouk orange
+      const colors = ['#FF6600', '#FF8533', '#CC5200', '#FFB380', '#FF994C'];
 
-    function updateConfetti() {
-      confetti.forEach(c => {
-        c.y += c.d * 0.5;
-        c.x += Math.sin(c.y * 0.01);
-        if (c.y > canvas.height) {
-          c.y = -10;
-          c.x = Math.random() * canvas.width;
+      function randomRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      function Confetto() {
+        this.x = Math.random() * W;
+        this.y = Math.random() * H - H;
+        this.r = randomRange(5, 10);
+        this.d = randomRange(10, 30);
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.tilt = randomRange(-10, 10);
+        this.tiltAngleIncremental = randomRange(0.05, 0.12);
+        this.tiltAngle = 0;
+
+        this.draw = function () {
+          ctx.beginPath();
+          ctx.lineWidth = this.r / 2;
+          ctx.strokeStyle = this.color;
+          ctx.moveTo(this.x + this.tilt + this.r / 4, this.y);
+          ctx.lineTo(this.x + this.tilt, this.y + this.tilt + this.r / 4);
+          ctx.stroke();
+        };
+      }
+
+      function initConfetti() {
+        for (let i = 0; i < confettiCount; i++) {
+          confetti.push(new Confetto());
         }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        confetti.forEach((c) => c.draw());
+        update();
+      }
+
+      function update() {
+        confetti.forEach((c, i) => {
+          c.tiltAngle += c.tiltAngleIncremental;
+          c.y += (Math.cos(c.d) + 3 + c.r / 2) / 2;
+          c.x += Math.sin(c.d);
+          c.tilt = Math.sin(c.tiltAngle) * 15;
+
+          if (c.y > H) {
+            confetti[i] = new Confetto();
+            confetti[i].x = Math.random() * W;
+            confetti[i].y = -10;
+          }
+        });
+      }
+
+      window.addEventListener('resize', () => {
+        W = window.innerWidth;
+        H = window.innerHeight;
+        canvas.width = W;
+        canvas.height = H;
       });
-    }
 
-    function animate() {
-      drawConfetti();
-      requestAnimationFrame(animate);
-    }
-
-    animate();
+      initConfetti();
+      setInterval(draw, 25);
+    })();
   </script>
 </body>
 </html>

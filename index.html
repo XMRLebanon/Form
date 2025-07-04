@@ -98,7 +98,7 @@
     <p>Accept Monero (XMR) in Lebanon</p>
   </header>
 
-  <form action="https://formspree.io/f/xovwbzak" method="POST" onsubmit="window.location='thankyou.html'; return true;">
+  <form action="https://formspree.io/f/xovwbzak" method="POST">
     <label>Business Name:
       <input type="text" name="business_name" required />
     </label>
@@ -144,6 +144,7 @@
       <textarea name="comments"></textarea>
     </label>
 
+    <!-- 🔁 Redirect to custom thank-you page -->
     <input type="hidden" name="_redirect" value="thankyou.html" />
 
     <button type="submit">Submit</button>

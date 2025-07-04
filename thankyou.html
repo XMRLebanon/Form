@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You</title>
+  <style>
+    body {
+      background: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      overflow: hidden;
+    }
+
+    header {
+      animation: pulseHeader 2.5s infinite;
+      margin-bottom: 30px;
+    }
+
+    @keyframes pulseHeader {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    header img {
+      width: 200px;
+      transition: transform 0.5s;
+    }
+
+    header img:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      color: #FF6600;
+      font-size: 2.5em;
+      animation: fadeIn 1s ease-out;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-top: 20px;
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    a.button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background: #FF6600;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    a.button:hover {
+      background: #e65c00;
+      transform: scale(1.05);
+    }
+
+    .social {
+      margin-top: 40px;
+    }
+
+    .social a {
+      color: #FF6600;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1.1em;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="./logo.png" alt="XMRsouk Logo" />
+  </header>
+
+  <h1>Thank You!</h1>
+  <p>Your form has been submitted successfully.<br>We will contact you soon.</p>
+  <a class="button" href="index.html">Back to Form</a>
+
+  <div class="social">
+    <p>Follow us on X:</p>
+    <a href="https://x.com/AboudeNahle?t=vTEttB1J5DEsu7KW35roxw&s=09" target="_blank">@AboudeNahle</a>
+  </div>
+
+  <!-- Confetti canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // XMRsouk color palette
+    const palette = ['#FF6600', '#ffaa33', '#cccccc', '#1e1e1e'];
+
+    const confetti = [];
+    for (let i = 0; i < 200; i++) {
+      confetti.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        r: Math.random() * 6 + 4,
+        d: Math.random() * 100 + 10,
+        color: palette[Math.floor(Math.random() * palette.length)],
+        tilt: Math.random() * 10 - 5,
+        tiltAngle: 0,
+        tiltAngleIncremental: (Math.random() * 0.07) + 0.05
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < confetti.length; i++) {
+        let c = confetti[i];
+        ctx.beginPath();
+        ctx.lineWidth = c.r / 2;
+        ctx.strokeStyle = c.color;
+        ctx.moveTo(c.x + c.tilt + (c.r / 4), c.y);
+        ctx.lineTo(c.x + c.tilt, c.y + c.tilt + (c.r / 4));
+        ctx.stroke();
+      }
+      update();
+    }
+
+    function update() {
+      for (let i = 0; i < confetti.length; i++) {
+        let c = confetti[i];
+        c.tiltAngle += c.tiltAngleIncremental;
+        c.y += (Math.cos(c.d) + 3 + c.r / 2) / 2;
+        c.tilt = Math.sin(c.tiltAngle - i / 3) * 15;
+
+        if (c.y > canvas.height) {
+          c.y = -10;
+          c.x = Math.random() * canvas.width;
+        }
+      }
+    }
+
+    (function animate() {
+      draw();
+      requestAnimationFrame(animate);
+    })();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
